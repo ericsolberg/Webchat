@@ -5,19 +5,23 @@ import './style.scss'
 
 const Header = ({ closeWebchat, preferences, logoStyle }) => (
   <div
-    className='RecastAppHeader CaiAppHeader'
+    className="RecastAppHeader CaiAppHeader"
     style={{
       color: preferences.complementaryColor,
       backgroundColor: preferences.accentColor,
     }}
   >
-    <img className='RecastAppHeader--logo CaiAppHeader--logo' src={preferences.headerLogo} style={logoStyle} />
+    <img
+      className="RecastAppHeader--logo CaiAppHeader--logo"
+      src={preferences.headerLogo}
+      style={logoStyle}
+    />
 
-    <div className='RecastAppHeader--title CaiAppHeader--title'>{preferences.headerTitle}</div>
+    <div className="RecastAppHeader--title CaiAppHeader--title">{preferences.headerTitle}</div>
 
-    <div className='RecastAppHeader--btn CaiAppHeader--btn' onClick={closeWebchat}>
+    {/* <div className='RecastAppHeader--btn CaiAppHeader--btn' onClick={closeWebchat}>
       <img src='https://cdn.cai.tools.sap/webchat/close.svg' />
-    </div>
+    </div> */}
   </div>
 )
 

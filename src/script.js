@@ -9,6 +9,7 @@ import App from 'containers/App'
 const idChatDiv = 'cai-webchat-div'
 
 if (!document.getElementById(idChatDiv)) {
+  console.log('creating div')
   const element = document.createElement('div')
   element.id = idChatDiv
   document.body.appendChild(element)
@@ -23,6 +24,8 @@ const token = script.getAttribute('token')
 
 if (root && channelId && token) {
   getChannelPreferences(channelId, token).then(preferences => {
+    // override preferences
+    preferences.openingType = 'always'
     ReactDOM.render(
       <Provider store={store}>
         <App token={token} channelId={channelId} preferences={preferences} />

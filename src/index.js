@@ -9,11 +9,15 @@ if (!global._babelPolyfill) {
   require('babel-polyfill')
 }
 
+console.log('HERE')
+
 export default class CaiWebchat extends Component {
-  render () {
+  render() {
+    console.log('CAIWebchat', this.props)
+    alert('hello')
     return (
       <Provider store={store}>
-        <Webchat {...this.props} />
+        <Webchat preferences={{ openingType: 'always' }} {...this.props} />
       </Provider>
     )
   }

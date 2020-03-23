@@ -10,26 +10,26 @@ import { storeCredentialsToLocalStorage, getCredentialsFromLocalStorage } from '
 
 import './style.scss'
 
-const NO_LOCALSTORAGE_MESSAGE
-  = 'Sorry, your browser does not support web storage. Are you in localhost ?'
+const NO_LOCALSTORAGE_MESSAGE =
+  'Sorry, your browser does not support web storage. Are you in localhost ?'
 
 @connect(
   state => ({
     isReady: state.conversation.conversationId,
-    }),
+  }),
   {
-  setCredentials,
-  setFirstMessage,
-  createConversation,
-  removeAllMessages,
+    setCredentials,
+    setFirstMessage,
+    createConversation,
+    removeAllMessages,
   },
 )
 class App extends Component {
   state = {
-    expanded: this.props.expanded || false,
+    expanded: true,
   }
 
-  componentDidMount () {
+  componentDidMount() {
     const { channelId, token, preferences, noCredentials, onRef } = this.props
     const credentials = getCredentialsFromLocalStorage(channelId)
     const payload = { channelId, token }
@@ -57,28 +57,28 @@ class App extends Component {
     this.props.setCredentials(payload)
   }
 
-  componentWillReceiveProps (nextProps) {
+  componentWillReceiveProps(nextProps) {
     const { isReady, preferences, expanded } = nextProps
 
     if (isReady !== this.props.isReady) {
       let expanded = null
 
       switch (preferences.openingType) {
-      case 'always':
-        expanded = true
-        break
-      case 'never':
-        expanded = false
-        break
-      case 'memory':
-        if (typeof window.localStorage !== 'undefined') {
-          expanded = localStorage.getItem('isChatOpen') === 'true'
-        } else {
-          console.log(NO_LOCALSTORAGE_MESSAGE)
-        }
-        break
-      default:
-        break
+        case 'always':
+          expanded = true
+          break
+        case 'never':
+          expanded = false
+          break
+        case 'memory':
+          if (typeof window.localStorage !== 'undefined') {
+            expanded = localStorage.getItem('isChatOpen') === 'true'
+          } else {
+            console.log(NO_LOCALSTORAGE_MESSAGE)
+          }
+          break
+        default:
+          break
       }
       this.setState({ expanded })
     }
@@ -88,7 +88,7 @@ class App extends Component {
     }
   }
 
-  componentDidUpdate (prevState) {
+  componentDidUpdate(prevState) {
     const { onToggle } = this.props
 
     if (prevState.expanded !== this.state.expanded) {
@@ -103,7 +103,7 @@ class App extends Component {
     }
   }
 
-  componentDidCatch (error, info) {
+  componentDidCatch(error, info) {
     console.log(error, info)
   }
 
@@ -120,7 +120,7 @@ class App extends Component {
     this.props.removeAllMessages()
   }
 
-  render () {
+  render() {
     const {
       preferences,
       containerMessagesStyle,
@@ -141,24 +141,24 @@ class App extends Component {
     const { expanded } = this.state
 
     return (
-      <div className='RecastApp CaiApp'>
+      <div className="RecastApp CaiApp">
         <link
-          rel='stylesheet'
-          type='text/css'
-          href='https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.6.0/slick.min.css'
+          rel="stylesheet"
+          type="text/css"
+          href="https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.6.0/slick.min.css"
         />
         <link
-          rel='stylesheet'
-          type='text/css'
-          href='https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.6.0/slick-theme.min.css'
+          rel="stylesheet"
+          type="text/css"
+          href="https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.6.0/slick-theme.min.css"
         />
 
-        <Expander
+        {/* <Expander
           show={!expanded}
           onClick={this.toggleChat}
           preferences={preferences}
           style={expanderStyle}
-        />
+        /> */}
 
         <Chat
           show={expanded}
